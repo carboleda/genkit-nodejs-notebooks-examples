@@ -1,0 +1,21 @@
+{
+  "name": "genkit",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "gs": "npx tsx examples/getting-starter/index.ts",
+    "agent": "npx tsx examples/agent/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@genkit-ai/googleai": "^1.8.0",
+    "genkit": "^1.8.0",
+    "genkitx-ollama": "^1.8.0"
+  }
+}
