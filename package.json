@@ -1,20 +1,25 @@
 {
   "name": "genkit",
   "version": "1.0.0",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "gs": "npx tsx examples/getting-starter/index.ts",
-    "agent": "npx tsx examples/agent/index.ts"
+    "agent": "npx tsx examples/agent/index.ts",
+    "text2image": "npx tsx --env-file=.env examples/multimodal/text2Image.ts",
+    "dotprompt": "GENKIT_ENV=dev tsx --watch --env-file=.env examples/dotprompt/simple.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "tsx": "^4.20.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.8.0",
+    "@genkit-ai/vertexai": "^1.11.1",
     "genkit": "^1.8.0",
     "genkitx-ollama": "^1.8.0"
   }

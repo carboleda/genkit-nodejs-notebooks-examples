@@ -1,0 +1,53 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "# Ollama Plugin"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Import necessary modules"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "import { z } from \"genkit\";\nimport { genkit } from \"genkit/beta\";\nimport { googleAI } from \"@genkit-ai/googleai\";\nimport { ollama } from 'genkitx-ollama';"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Instanciate Genkit"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const ai = genkit({\n  plugins: [\n     ollama({\n      models: [{ name: 'gemma' }],\n      serverAddress: 'http://127.0.0.1:11434', // default local address\n    }),\n  ],\n  // model: googleAI.model('gemini-2.0-flash'),\n});"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Generate text"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const { text } = await ai.generate({\n  prompt: \"Como es mi nombre?\",\n  messages: [{ role: \"user\", content: [{ text: \"Mi nombre es Juan\" }] }],\n  model: \"ollama/gemma:7b\",\n});\nconsole.log(text);\n"
+            ],
+            "outputs": []
+        }
+    ]
+}

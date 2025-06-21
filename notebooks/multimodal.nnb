@@ -1,0 +1,44 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "# Multimodal"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "process.loadEnvFile('../.env');\nimport { genkit } from \"genkit\";\nimport { vertexAI } from \"@genkit-ai/vertexai\";"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const imagen3 = vertexAI.model(\"imagen-3.0-generate-002\");\nconst ai = genkit({\n  plugins: [vertexAI()],\n  model: imagen3, // set default model\n});"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "167569379791",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const menuItem = {\n  allergens: [\"Gluten\", \"Dairy\", \"Eggs\", \"Shellfish\"],\n  description:\n    \"Lobster ravioli stuffed with a creamy ricotta and lemon zest filling, served in a light tomato-saffron broth with Calabrian chili oil and toasted fennel seeds.\",\n  dishName: \"Ravioli all'Aragosta in Brodo di Zafferano\",\n};\n\nconst response = await ai.generate({\n  // prompt: `Generate a photo of the following dish: ${JSON.stringify(menuItem)}`,\n  prompt: \"a banana riding a bicycle\",\n  output: {\n    format: \"media\",\n  },\n});\n\nresponse.media.url;"
+            ],
+            "outputs": []
+        }
+    ]
+}

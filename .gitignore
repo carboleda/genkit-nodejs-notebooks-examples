@@ -8,12 +8,14 @@ pnpm-debug.log*
 # Environment variables
 .env
 .env.*
+.sa/*
 
 # Build output
 dist/
 build/
 out/
 coverage/
+.genkit/
 
 # OS files
 .DS_Store

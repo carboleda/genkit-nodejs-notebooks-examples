@@ -1,0 +1,81 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "# Unified API"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Import necessary modules"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "process.loadEnvFile('../.env');\nimport { z } from 'zod';\n\nconst restaurantSuggestionSchema = z.object({\n  dishName: z.string().describe('The name of the dish'),\n  description: z.string().describe('A brief description of the dish'),\n  allergens: z.array(z.string()).describe('List of common allergens'),\n});\nconst MenuItemSchema = restaurantSuggestionSchema.shape;"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "167569379791",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Instanciate Genkit"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "import { googleAI, gemini20Flash,  } from '@genkit-ai/googleai';\nimport { genkit } from 'genkit';\n\nconst ai = genkit({\n  plugins: [googleAI()],\n  model: gemini20Flash, // set default model\n});"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Generate text"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const theme = \"Italian\";\nconst { output: menuItem } = await ai\n  .generate({\n    model: gemini20Flash,\n    prompt: `Invent a unique menu item for a \"${theme}\" themed restaurant.`,\n    output: {\n      schema: restaurantSuggestionSchema,\n    },\n  });\n\nconsole.log(\"Suggested Menu Item:\", menuItem);\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Suggested Menu Item: {",
+                                "  allergens: [ 'gluten', 'dairy', 'nuts' ],",
+                                "  description: 'Handmade chestnut gnocchi served with a creamy gorgonzola sauce, topped with toasted walnuts and a drizzle of truffle oil. Garnished with crispy fried sage.',",
+                                "  dishName: 'Gnocchi di Castagne al Gorgonzola e Noci'",
+                                "}",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,53 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "# Streaming"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Instanciate Genkit"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "process.loadEnvFile('../.env');\nimport { googleAI, gemini20Flash } from '@genkit-ai/googleai';\nimport { genkit } from 'genkit';\n\nconst ai = genkit({\n  plugins: [googleAI()],\n  model: gemini20Flash, // set default model\n});"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Generate text with streamed output"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "import { display } from \"node-kernel\";\n\nconst { stream } = await ai\n  .generateStream({\n    model: gemini20Flash,\n    prompt: `Generate a summary of the latest advancements in AI technology,\n    focusing on natural language processing and machine learning.\n    Include key breakthroughs, notable research papers, and emerging trends.`,\n  });\n\nfor await (const chunk of stream) {\n  display.markdown(chunk.text);\n}"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Full response"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "import { display } from \"node-kernel\";\n\nconst { response } = await ai.generateStream({\n  model: gemini20Flash,\n  prompt: `Generate a summary of the latest advancements in AI technology,\n    focusing on natural language processing and machine learning.\n    Include key breakthroughs, notable research papers, and emerging trends.`,\n});\n\ndisplay.markdown((await response).text);"
+            ],
+            "outputs": []
+        }
+    ]
+}
