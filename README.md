@@ -1,7 +1,11 @@
+### Install Node.js REPL plugin in VSCode
+https://marketplace.visualstudio.com/items?itemName=donjayamanne.typescript-notebook
+
+### Run scripts using genkit
 ```sh
 # Start genkit UI
-DEBUG=dev genkit ui:start
+genkit ui:start
 
 # Start application with genkit
-GENKIT_ENV=dev genkit start -- npm run dotprompt
+GENKIT_ENV=dev npm run dotprompt
 ```
