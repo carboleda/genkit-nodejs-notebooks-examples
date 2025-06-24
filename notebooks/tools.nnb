@@ -1,0 +1,73 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "# Tools"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Instanciate Genkit"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "process.loadEnvFile('../.env');\nimport { googleAI, gemini20Flash } from '@genkit-ai/googleai';\nimport { genkit, z } from 'genkit';\n\nconst ai = genkit({\n  plugins: [googleAI()],\n  model: gemini20Flash, // set default model\n});"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Define tools"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const getCurrentTime = ai.defineTool(\n  {\n    name: 'getCurrentTime',\n    description: 'Get the current time in a specific location',\n    inputSchema: z.object({\n      timeZone: z.string().describe('Timezone in IANA format. Example America/Bogotá, Europe/Berlin'),\n    }),\n    outputSchema: z.string().describe('The current date and time in the specified timezone'),\n  },\n  async ({ timeZone }) => {\n    const now = new Date();\n    const date = now.toLocaleDateString(\"en-US\", { timeZone });\n    const time = now.toLocaleTimeString(\"en-US\", { timeZone });\n    return `${date} ${time}`;\n  },\n);"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Generate content using the tool"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const systemPrompt = `For any location I give you, generate the timezone in IANA format.\nExample:\nCali, Colombia: America/Bogotá\nBerlin: Europe/Berlin\nBarcelona: Europe/Madrid\n\nThen you should use the timezone and any tool that requires it.`;\nconst currentTimePrompt = ai.definePrompt(\n  {\n    name: 'currentTimePrompt',\n    tools: [getCurrentTime],\n  },\n  `${systemPrompt}. What is the current time in {{location}}?`\n);"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const response = await currentTimePrompt({ location: 'Medellin' });\nconsole.log('Response:', response.text);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Response: The current time in Medellin, Colombia is 6/23/2025 11:19:16 PM.",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
