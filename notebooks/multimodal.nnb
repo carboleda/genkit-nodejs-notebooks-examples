@@ -17,21 +17,9 @@
         {
             "language": "typescript",
             "source": [
-                "const imagen3 = vertexAI.model(\"imagen-3.0-generate-002\");\nconst ai = genkit({\n  plugins: [vertexAI()],\n  model: imagen3, // set default model\n});"
+                "const Imagen3 = vertexAI.model(\"imagen-3.0-generate-002\");\nconst ai = genkit({\n  plugins: [vertexAI()],\n  model: Imagen3, // set default model\n});"
             ],
-            "outputs": [
-                {
-                    "items": [
-                        {
-                            "mime": "application/vnd.code.notebook.stdout",
-                            "value": [
-                                "167569379791",
-                                ""
-                            ]
-                        }
-                    ]
-                }
-            ]
+            "outputs": []
         },
         {
             "language": "typescript",

@@ -10,9 +10,7 @@ const ai = genkit({
 
 const helloPrompt = ai.prompt("hello");
 
-console.log(helloPrompt);
-
 (async () => {
   const response = await helloPrompt({ name: "Carlos" });
-  console.log(response);
+  console.log(response.text);
 })();
