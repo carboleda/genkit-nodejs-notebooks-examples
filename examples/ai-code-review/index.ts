@@ -15,7 +15,16 @@ const ReviewOutputSchema = z.object({
   fileName: z.string().describe("The name of the file that was reviewed."),
   summary: z.string().describe("A brief summary of the code's functionality."),
   suggestions: z
-    .array(z.string())
+    .array(
+      z.object({
+        suggestion: z.string().describe("A suggestion for improving the code."),
+        reason: z.string().describe("The reason for the suggestion."),
+        line: z
+          .number()
+          .optional()
+          .describe("The line number where the suggestion applies."),
+      })
+    )
     .describe(
       "Suggestions for improving the code, such as performance optimizations, readability improvements, or best practices."
     ),
@@ -91,6 +100,13 @@ async function main() {
   const { stream } = ai.generateStream({
     prompt:
       "Make a code review of the changed files in the current git repository.",
+    output: {
+      schema: z.object({
+        review: z
+          .array(ReviewOutputSchema)
+          .describe("List of code reviews for each changed file."),
+      }),
+    },
     tools: [getGitStatusTool, codeReviewFileTool],
   });
 
