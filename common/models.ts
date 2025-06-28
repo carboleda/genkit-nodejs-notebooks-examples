@@ -15,7 +15,7 @@ export const llama3groq = () =>
   ollama({
     models: [
       {
-        name: "llama3-groq-tool-use:8b",
+        name: "ollama/llama3-groq-tool-use:8b",
         type: "generate",
       },
     ],
