@@ -4,7 +4,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "gs": "npx tsx --env-file=.env examples/getting-starter/index.ts",
+    "gs": "genkit start -- npx tsx --env-file=.env examples/getting-starter/index.ts",
     "agent": "npx tsx --env-file=.env examples/agent/index.ts",
     "dotprompt": "GENKIT_ENV=dev tsx --watch --env-file=.env examples/dotprompt/simple.ts",
     "codereview": "npx tsx --env-file=.env examples/ai-code-review/index.ts"

@@ -10,7 +10,7 @@
    - Copy `.env.example` to `.env` and update with your credentials if required.
    - Some scripts has the `GENKIT_ENV=dev` environment variable that allows them to connect with Genkit UI.
 
-3. You can start the Genkit UI by running `genkit ui:start` command.
+3. You can start the Genkit UI by running `genkit ui:start` command. Alternative, you can start the Genkit UI and the run the script in one command by running `genkit start -- YOUR_SCRIPT`. See Getting Started in [Available Scripts](#Available-Scripts) section
 
 4. **Recommended VSCode Extension:**
    - [Node.js REPL (TypeScript/JavaScript Notebooks)](https://marketplace.visualstudio.com/items?itemName=donjayamanne.typescript-notebook)
@@ -34,7 +34,7 @@ All scripts use [tsx](https://github.com/esbuild-kit/tsx) for TypeScript executi
 
 | Script          | Command                    | Description                                 | Genkit UI |
 |-----------------|----------------------------|---------------------------------------------|-----------|
-| Getting Started | `npm run gs`               | Runs the getting started example            | No        |
+| Getting Started | `npm run gs`               | Runs the getting started example            | Yes       |
 | Dotprompt       | `npm run dotprompt`        | Runs the dotprompt example.                 | Yes       |
 | Agent           | `npm run agent`            | Runs the agent example                      | No        |
 | Codereview      | `npm run codereview`       | Runs the AI code review example             | No        |
