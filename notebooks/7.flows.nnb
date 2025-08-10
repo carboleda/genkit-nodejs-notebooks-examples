@@ -1,0 +1,88 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "# Flows"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Instanciate Genkit"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "process.loadEnvFile('../.env');\nimport { genkit, z } from 'genkit';\nimport { googleAI, gemini20Flash } from '@genkit-ai/googleai';\n\nconst ai = genkit({\n  plugins: [googleAI()],\n  model: gemini20Flash, // set default model\n});"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Create Output Schema"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const MenuItemSchema = z.object({\n  dishname: z.string(),\n  description: z.string(),\n});"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Define flow"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const menuSuggestionFlowWithSchema = ai.defineFlow(\n  {\n    name: 'menuSuggestionFlow',\n    inputSchema: z.object({ theme: z.string() }),\n    outputSchema: MenuItemSchema,\n  },\n  async ({ theme }) => {\n    const { output } = await ai.generate({\n      model: googleAI.model('gemini-2.5-flash'),\n      prompt: `Invent a menu item for a ${theme} themed restaurant.`,\n      output: { schema: MenuItemSchema },\n    });\n    if (output == null) {\n      throw new Error(\"Response doesn't satisfy schema.\");\n    }\n    return output;\n  },\n);"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Execute flow programatically"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const { dishname, description } = await menuSuggestionFlowWithSchema({ theme: 'bistro' });\n\nconsole.log(`Dish Name: ${dishname}`);\nconsole.log(`Description: ${description}`);"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Running flows from the command line\n**PRECONDITIONS:**\n1. Genkit CLI must be installed\n1. The script containing the flow must be active and running. Otherwise, it would fail with error: *Error: No runtimes found*"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "shellscript",
+            "source": [
+                "genkit flow:run menuSuggestionFlow '{\"theme\": \"French\"}'"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "shellscript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        }
+    ]
+}
