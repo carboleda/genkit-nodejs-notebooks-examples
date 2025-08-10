@@ -1,0 +1,79 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "# Dotprompt"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Instanciate Genkit"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "process.loadEnvFile('../.env');\nimport path from 'node:path';\nimport { genkit } from 'genkit';\nimport { googleAI } from '@genkit-ai/googleai';\n\nconsole.log('Prompts Directory:', path.join(process.cwd(), '../prompts'));\n\nconst ai = genkit({\n  plugins: [googleAI()],\n  promptDir: path.join(process.cwd(), '../prompts'), // Optional\n});"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Prompts Directory: /Users/carboleda/Documents/Development/AI/genkit-nodejs-notebooks-examples/prompts",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Load prompt"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const helloPrompt = ai.prompt(\"hello\");"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Execute prompt"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const response = await helloPrompt({ name: \"Carlos\" });\nconsole.log(response.text);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Oh, hello there! A most wonderful welcome to you, Carlos! It is absolutely delightful to have you here.",
+                                "",
+                                "Please, make yourself completely at home. It's truly a pleasure to greet you! How can I make your experience simply wonderful today?",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
