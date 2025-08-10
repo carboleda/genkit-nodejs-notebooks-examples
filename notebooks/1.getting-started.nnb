@@ -1,0 +1,42 @@
+{
+    "cells": [
+        {
+            "language": "typescript",
+            "source": [
+                "// import the Genkit and Google AI plugin libraries\nprocess.loadEnvFile('../.env');\nimport { gemma34b } from \"../common/models\";\nimport { genkit } from \"genkit\";"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// configure a Genkit instance\nconst ai = genkit({\n  plugins: [gemma34b()],\n});"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// make a generation request\n  const llmResponse = await ai.generate({\n    model: \"ollama/gemma3:4b\",\n    prompt: \"What's your name?\",\n  });\n  console.log(llmResponse.text);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "My name is Gemma. I was created by the Gemma team at Google DeepMind. ",
+                                "",
+                                "It's nice to meet you! ",
+                                "",
+                                "You can learn more about me on the Gemma website: [https://ai.google.com/gemma](https://ai.google.com/gemma)",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
