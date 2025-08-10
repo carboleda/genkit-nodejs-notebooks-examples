@@ -18,6 +18,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@genkit-ai/compat-oai": "^1.16.0",
     "@genkit-ai/googleai": "^1.13.0",
     "@genkit-ai/vertexai": "^1.13.0",
     "genkit": "^1.13.0",

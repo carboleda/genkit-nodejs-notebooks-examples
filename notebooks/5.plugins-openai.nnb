@@ -1,0 +1,53 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "# OpenAI Plugin"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Import necessary modules"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "process.loadEnvFile('../.env');\nimport { genkit } from \"genkit\";\nimport { openAI } from '@genkit-ai/compat-oai/openai';"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Instanciate Genkit"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const ai = genkit({\n  plugins: [\n     openAI(),\n  ],\n  model: openAI.model('gpt-4o'),\n});"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Generate text"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const { text } = await ai.generate({\n  prompt: \"Como es mi nombre?\",\n  messages: [{ role: \"user\", content: [{ text: \"Mi nombre es Juan\" }] }],\n});\nconsole.log(text);\n"
+            ],
+            "outputs": []
+        }
+    ]
+}

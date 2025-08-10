@@ -17,7 +17,7 @@
         {
             "language": "typescript",
             "source": [
-                "// make a generation request\n  const llmResponse = await ai.generate({\n    model: \"ollama/gemma3:4b\",\n    prompt: \"What's your name?\",\n  });\n  console.log(llmResponse.text);"
+                "// make a generation request\nconst llmResponse = await ai.generate({\n  model: \"ollama/gemma3:4b\",\n  prompt: \"What's your name?\",\n});\nconsole.log(llmResponse.text);"
             ],
             "outputs": [
                 {
