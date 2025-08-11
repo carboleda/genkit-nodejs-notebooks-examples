@@ -4,9 +4,8 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "gs": "genkit start -- npx tsx --env-file=.env examples/getting-starter/index.ts",
     "agent": "npx tsx --env-file=.env examples/agent/index.ts",
-    "dotprompt": "GENKIT_ENV=dev tsx --watch --env-file=.env examples/dotprompt/simple.ts",
+    "travelflow": "GENKIT_ENV=dev tsx --watch --env-file=.env examples/flows/travel-flow.ts",
     "codereview": "npx tsx --env-file=.env examples/ai-code-review/index.ts"
   },
   "keywords": [],
@@ -21,6 +20,7 @@
     "@genkit-ai/compat-oai": "^1.16.0",
     "@genkit-ai/googleai": "^1.13.0",
     "@genkit-ai/vertexai": "^1.13.0",
+    "@tavily/core": "^0.5.10",
     "genkit": "^1.13.0",
     "genkitx-ollama": "^1.13.0"
   }
