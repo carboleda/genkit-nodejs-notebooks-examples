@@ -1,5 +1,5 @@
 import { genkit, z } from "genkit";
-import { googleAI } from "@genkit-ai/googleai";
+import { googleAI, gemini20Flash } from "@genkit-ai/googleai";
 import { llama3groq } from "../../common/models";
 import { promisify } from "node:util";
 import { exec } from "node:child_process";
@@ -8,7 +8,7 @@ const execAsync = promisify(exec);
 
 const ai = genkit({
   plugins: [llama3groq(), googleAI()],
-  model: googleAI.model("gemini-2.0-flash"),
+  model: gemini20Flash,
 });
 
 const ReviewOutputSchema = z.object({
@@ -29,6 +29,8 @@ const ReviewOutputSchema = z.object({
       "Suggestions for improving the code, such as performance optimizations, readability improvements, or best practices."
     ),
 });
+ai.defineSchema("ReviewOutputSchema", ReviewOutputSchema);
+const codeReviewFilePrompt = ai.prompt("codeReview");
 
 const getGitStatusTool = ai.defineTool(
   {
@@ -72,23 +74,29 @@ const codeReviewFileTool = ai.defineTool(
     );
 
     // Generate a prompt for the AI to review the code
-    const prompt = `You are an AI code reviewer. Review the following code diff and provide a summary and suggestions for improvement:
-    Code diff for ${fileName}:
-    \`\`\`${fileExtension}
-    ${diff}
-    \`\`\`\`
+    // const prompt = `You are an AI code reviewer. Review the following code diff and provide a summary and suggestions for improvement:
+    // Code diff for ${fileName}:
+    // \`\`\`${fileExtension}
+    // ${diff}
+    // \`\`\`\`
 
-    Summary:
-    - Provide a brief summary of the code's functionality.
-    Suggestions:
-    - List any suggestions for improving the code, such as performance optimizations, readability improvements, or best practices.`;
+    // Summary:
+    // - Provide a brief summary of the code's functionality.
+    // Suggestions:
+    // - List any suggestions for improving the code, such as performance optimizations, readability improvements, or best practices.`;
 
-    // Call the AI model to generate the review
-    const { output: review } = await ai.generate({
-      prompt,
-      output: {
-        schema: ReviewOutputSchema,
-      },
+    // // Call the AI model to generate the review
+    // const { output: review } = await ai.generate({
+    //   prompt,
+    //   output: {
+    //     schema: ReviewOutputSchema,
+    //   },
+    // });
+
+    const { output: review } = await codeReviewFilePrompt({
+      fileName,
+      fileExtension,
+      diff,
     });
 
     return review;
@@ -97,7 +105,7 @@ const codeReviewFileTool = ai.defineTool(
 
 // =============== USAGE EXAMPLE ===============
 async function main() {
-  const { stream } = ai.generateStream({
+  const { stream, response } = ai.generateStream({
     prompt:
       "Make a code review of the changed files in the current git repository.",
     output: {
@@ -110,34 +118,11 @@ async function main() {
     tools: [getGitStatusTool, codeReviewFileTool],
   });
 
-  for await (const chunk of stream) {
-    console.log(chunk.text);
-  }
+  // for await (const chunk of stream) {
+  //   console.log(chunk.text);
+  // }
+
+  console.log("Code Review Results:", (await response).data.review);
 }
 
 main();
-
-async function test() {
-  const { stdout, stderr } = await execAsync("git status --short");
-
-  if (stderr) {
-    console.error("Error executing git diff:", stderr);
-    return;
-  }
-
-  const files = await Promise.all(
-    stdout
-      .split("\n")
-      .filter(Boolean)
-      .map((line) => line.split(" ").at(-1).trim())
-      .map(async (fileName) => {
-        const { stdout, stderr } = await execAsync(`git diff HEAD ${fileName}`);
-        return {
-          fileName,
-          diff: stderr || stdout.trim(),
-        };
-      })
-  );
-
-  console.log("stdout:", files);
-}

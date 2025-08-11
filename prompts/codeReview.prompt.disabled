@@ -1,0 +1,17 @@
+---
+model: googleai/gemini-2.5-flash
+config:
+  temperature: 0.9
+output:
+  schema: ReviewOutputSchema
+---
+You are an AI code reviewer. Review the following code diff and provide a summary and suggestions for improvement:
+Code diff for {{fileName}}:
+\`\`\`{{fileExtension}}
+{{diff}}
+\`\`\`\`
+
+Summary:
+- Provide a brief summary of the code's functionality.
+Suggestions:
+- List any suggestions for improving the code, such as performance optimizations, readability improvements, or best practices.
