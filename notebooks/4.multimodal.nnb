@@ -8,9 +8,23 @@
             "outputs": []
         },
         {
+            "language": "markdown",
+            "source": [
+                "### Import dependencies"
+            ],
+            "outputs": []
+        },
+        {
             "language": "typescript",
             "source": [
                 "process.loadEnvFile('../.env');\nimport { genkit } from \"genkit\";\nimport { vertexAI } from \"@genkit-ai/vertexai\";"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Instanciate Genkit"
             ],
             "outputs": []
         },
@@ -22,9 +36,30 @@
             "outputs": []
         },
         {
+            "language": "markdown",
+            "source": [
+                "### Banana example"
+            ],
+            "outputs": []
+        },
+        {
             "language": "typescript",
             "source": [
-                "const menuItem = {\n  allergens: [\"Gluten\", \"Dairy\", \"Eggs\", \"Shellfish\"],\n  description:\n    \"Lobster ravioli stuffed with a creamy ricotta and lemon zest filling, served in a light tomato-saffron broth with Calabrian chili oil and toasted fennel seeds.\",\n  dishName: \"Ravioli all'Aragosta in Brodo di Zafferano\",\n};\n\nconst response = await ai.generate({\n  // prompt: `Generate a photo of the following dish: ${JSON.stringify(menuItem)}`,\n  prompt: \"a banana riding a bicycle\",\n  output: {\n    format: \"media\",\n  },\n});\n\nresponse.media.url;"
+                "const response = await ai.generate({\n  prompt: \"a banana riding a bicycle\",\n  output: {\n    format: \"media\",\n  },\n});\n\nresponse.media.url;"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### Dish example"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const menuItem = {\n  allergens: [\"Gluten\", \"Dairy\", \"Eggs\", \"Shellfish\"],\n  description:\n    \"Lobster ravioli stuffed with a creamy ricotta and lemon zest filling, served in a light tomato-saffron broth with Calabrian chili oil and toasted fennel seeds.\",\n  dishName: \"Ravioli all'Aragosta in Brodo di Zafferano\",\n};\n\nconst response = await ai.generate({\n  prompt: `Generate a photo of the following dish: ${JSON.stringify(menuItem)}`,\n  output: {\n    format: \"media\",\n  },\n});\n\nresponse.media.url;"
             ],
             "outputs": []
         }

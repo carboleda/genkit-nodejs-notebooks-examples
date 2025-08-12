@@ -54,20 +54,7 @@
             "source": [
                 "const response = await currentTimePrompt({ location: 'Medellin' });\nconsole.log('Response:', response.text);"
             ],
-            "outputs": [
-                {
-                    "items": [
-                        {
-                            "mime": "application/vnd.code.notebook.stdout",
-                            "value": [
-                                "Response: The current time in Medellin, Colombia is 6/23/2025 11:19:16 PM.",
-                                "",
-                                ""
-                            ]
-                        }
-                    ]
-                }
-            ]
+            "outputs": []
         }
     ]
 }

@@ -66,7 +66,7 @@
         {
             "language": "markdown",
             "source": [
-                "### Running flows from the command line\n**PRECONDITIONS:**\n1. Genkit CLI must be installed\n1. The script containing the flow must be active and running. Otherwise, it would fail with error: *Error: No runtimes found*"
+                "### Running flows from the command line\n**PRECONDITIONS:**\n1. Genkit CLI must be installed\n1. The script containing the flow must be active and running. Otherwise, it will fail with error: `Error: No runtimes found`"
             ],
             "outputs": []
         },
@@ -74,13 +74,6 @@
             "language": "shellscript",
             "source": [
                 "genkit flow:run menuSuggestionFlow '{\"theme\": \"French\"}'"
-            ],
-            "outputs": []
-        },
-        {
-            "language": "shellscript",
-            "source": [
-                ""
             ],
             "outputs": []
         }

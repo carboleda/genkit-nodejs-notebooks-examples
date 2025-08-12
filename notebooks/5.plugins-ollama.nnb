@@ -47,19 +47,7 @@
             "source": [
                 "const { text } = await ai.generate({\n  prompt: \"Como es mi nombre?\",\n  messages: [{ role: \"user\", content: [{ text: \"Recuerda que mi nombre es Carlos\" }] }],\n  model: \"ollama/gemma:7b\",\n});\nconsole.log(text);\n"
             ],
-            "outputs": [
-                {
-                    "items": [
-                        {
-                            "mime": "application/vnd.code.notebook.stdout",
-                            "value": [
-                                "Tu nombre es Carlos. Como te dije anteriormente.",
-                                ""
-                            ]
-                        }
-                    ]
-                }
-            ]
+            "outputs": []
         }
     ]
 }
