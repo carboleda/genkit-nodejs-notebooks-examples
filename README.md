@@ -52,6 +52,13 @@ All scripts use [tsx](https://github.com/esbuild-kit/tsx) for TypeScript executi
 | Travelflow        | `npm run travelflow`        | Runs the travel flow example                | Yes       |
 | Travelflow Deploy | `npm run travelflow:deploy` | Runs the travel flow as an Express.js app   | Yes       |
 
+NOTE: You can start and stop the Developer UI using the following commands. It might fail the first time, just try it again
+
+```sh
+genkit ui:start
+
+genkit ui:stop
+```
 
 ## Running the Notebooks and Examples
 
