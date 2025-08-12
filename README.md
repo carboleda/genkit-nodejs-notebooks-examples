@@ -45,11 +45,12 @@ Make sure to keep your credentials secure and never commit your `.env` file to v
 
 All scripts use [tsx](https://github.com/esbuild-kit/tsx) for TypeScript execution.
 
-| Script          | Command                    | Description                                 | Genkit UI |
-|-----------------|----------------------------|---------------------------------------------|-----------|
-| Agent           | `npm run agent`            | Runs the agent example                      | No        |
-| Codereview      | `npm run codereview`       | Runs the AI code review example             | No        |
-| Travelflow      | `npm run travelflow`       | Runs the travel flow example                | No        |
+| Script            | Command                     | Description                                 | Genkit UI |
+|-------------------|-----------------------------|---------------------------------------------|-----------|
+| Agent             | `npm run agent`             | Runs the agent example                      | No        |
+| Codereview        | `npm run codereview`        | Runs the AI code review example             | No        |
+| Travelflow        | `npm run travelflow`        | Runs the travel flow example                | Yes       |
+| Travelflow Deploy | `npm run travelflow:deploy` | Runs the travel flow as an Express.js app   | Yes       |
 
 
 ## Running the Notebooks and Examples

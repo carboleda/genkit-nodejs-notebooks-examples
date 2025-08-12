@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "agent": "npx tsx --env-file=.env examples/agent/index.ts",
+    "codereview": "npx tsx --env-file=.env examples/ai-code-review/index.ts",
     "travelflow": "GENKIT_ENV=dev tsx --watch --env-file=.env examples/flows/travel-flow.ts",
-    "codereview": "npx tsx --env-file=.env examples/ai-code-review/index.ts"
+    "travelflow:deploy": "GENKIT_ENV=dev tsx --watch --env-file=.env examples/flows/deploy.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
   },
   "dependencies": {
     "@genkit-ai/compat-oai": "^1.16.0",
+    "@genkit-ai/express": "^1.16.0",
     "@genkit-ai/googleai": "^1.13.0",
     "@genkit-ai/vertexai": "^1.13.0",
     "@tavily/core": "^0.5.10",
